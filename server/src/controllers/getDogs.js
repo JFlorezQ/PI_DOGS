@@ -26,7 +26,7 @@ const getDogs = async (req, res) => {
 
         const dogsAPI = apiDogs.map((dog) => ({
             id: dog.id,
-            image: dog.reference_image_id,
+            image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
             name: dog.name,
             // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
             weightMetric: dog.weight ? `${dog.weight.metric} kg` : "Raza sin peso",

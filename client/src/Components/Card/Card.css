@@ -1,0 +1,12 @@
+.cardcontainer {
+    border: 1px solid black;
+    padding: 10px; /* Ajusta el relleno según tus necesidades */
+    width: 30%; /* El ancho será el 20% del contenedor */
+    height: 30%; /* Altura fija de 15 px */
+  }
+  .cardcontainer img {
+    width: 20%; /* El ancho será el 20% del contenedor */
+    height: 20%; /* Altura fija de 15 px */
+     /* Ajusta la forma de la imagen según sea necesario */
+    margin: 5px; /* Ajusta el margen según tus necesidades */
+  }

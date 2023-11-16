@@ -29,7 +29,7 @@ const getDogById = async (req, res) => {
       // Si encuentra el id, la constante dog toma estos datos
       dog = {
         id: response.data.id,
-        image: response.data.reference_image_id,
+        image: `https://cdn2.thedogapi.com/images/${response.data.reference_image_id}.jpg`,
         name: response.data.name,
         // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
         weightMetric: response.data.weight ? `${response.data.weight.metric} kg` : "Raza sin peso",
