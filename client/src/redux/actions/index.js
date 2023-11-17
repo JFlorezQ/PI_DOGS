@@ -4,13 +4,17 @@ export const GET_DOGS = 'GET_DOGS'
 export const GET_BY_ID = 'GET_BY_ID'
 export const GET_BY_NAME = 'GET_BY_NAME'
 export const GET_TEMPERAMENT = 'GET_TEMPERAMENT'
-export const GET_SELECTED = 'GET_SELECTED'
+export const ORDER = 'ORDER'
+export const FILTER_BY_TEMP = 'FILTER_BY_TEMP'
+// export const CLEAR_DOGS = 'CLEAR_DOG'
+export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN'
+export const FILTER_BY_LIFESPAN = 'FILTER_BY_LIFESPAN'
 
 export function getDogs() {
   return async function (dispatch) {
     const response = await axios('http://localhost:1030/dogs')
     return dispatch({
-      type: "GET_DOGS",
+      type: GET_DOGS,
       payload: response.data
     })
   }
@@ -22,7 +26,7 @@ export function getbyID(id) {
       const response = await axios.get(`http://localhost:1030/dogs/${id}`);
 
       dispatch({
-        type: "GET_BY_ID_SUCCESS",
+        type: GET_BY_ID,
         payload: response.data
       });
     } catch (error) {
@@ -60,6 +64,46 @@ export function gettemperament() {
     }
   };
 }
+
+
+export function orderDogs(order) {
+  return function (dispatch) {
+      dispatch({
+        type: ORDER,
+        payload: order,
+      });
+  };
+}
+
+export function filterbyTemp(temperament) {
+  return function (dispatch) {
+      dispatch({
+        type: FILTER_BY_TEMP,
+        payload: temperament,
+      });
+  };
+}
+
+
+export function filterbyOrigin(created) {
+  return function (dispatch) {
+      dispatch({
+        type: FILTER_BY_ORIGIN,
+        payload: created,
+      });
+  };
+}
+
+
+export function filterbyLifespan(lifespan) {
+  return function (dispatch) {
+      dispatch({
+        type: FILTER_BY_LIFESPAN,
+        payload: lifespan,
+      });
+  };
+}
+
 
 
 export function postDog(input) {
