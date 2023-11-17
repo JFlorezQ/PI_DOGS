@@ -1,6 +1,7 @@
 
 import './Navbar.css';
 import Searchbar from '../Searchbar/Searchbar';
+import Filterbar from '../Filterbar/Filterbar';
 import {NavLink } from "react-router-dom";
 
 
@@ -9,6 +10,7 @@ function Navbar({ onSearch }) {
   return (
     <nav>
       <Searchbar onSearch={onSearch} />
+      <Filterbar/>
       <div className="botones">
       <button className="boton"> 
       <NavLink className='link' to="/about"> About </NavLink>

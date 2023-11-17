@@ -1,0 +1,34 @@
+/* Estilo del contenedor principal */
+.landing-container {
+    position: relative;
+    height: 100vh; /* 100% del alto de la ventana */
+    background: url('https://i.pinimg.com/600x315/f1/a0/a3/f1a0a3ad92ce9d03e096dc91406573d5.jpg') center/cover no-repeat; /* Ajusta la imagen de fondo */
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center;
+    color: black; /* Color de texto negro */
+    text-align: center;
+    
+  }
+  
+  /* Estilo del texto en cursiva */
+  .landing-text {
+    font-style: italic;
+    font-size: 42px;
+
+  }
+  
+  /* Estilo del botón */
+  .landing-button {
+    padding: 10px 20px;
+    border: 2px solid black; /* Borde del botón */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: transparent; /* Fondo transparente */
+    color: black; /* Color de texto negro */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px; /* Espacio superior al texto */
+  }
+  

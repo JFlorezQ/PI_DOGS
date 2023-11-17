@@ -1,6 +1,7 @@
-import { GET_DOGS, GET_BY_NAME, GET_TEMPERAMENT, GET_BY_ID} from "../actions";
+import { GET_DOGS, GET_BY_NAME, GET_TEMPERAMENT, GET_BY_ID, ORDER, FILTER_BY_TEMP, FILTER_BY_LIFESPAN, FILTER_BY_ORIGIN} from "../actions";
 
-let initialState = { allDogs: [], allDogscopy: [], temperament: [], selectedTemperament: {}, idDog: []};
+let initialState = { allDogs: [], allDogscopy: [], temperament: [], idDog: [],
+                     orderAndFilter :{ order: 'A', temperamentFilter: 'All', originFilter: 'all'}};
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -18,7 +19,7 @@ function rootReducer(state = initialState, action) {
     case GET_BY_NAME:
       return {
         ...state,
-        allDogs: action.payload,
+        dogsName: action.payload,
       };
 
       case GET_TEMPERAMENT:
@@ -26,6 +27,29 @@ function rootReducer(state = initialState, action) {
           ...state,
           temperament: action.payload,
         };
+    case ORDER:
+      let orderedDogs = [...state.allDogs]
+      let orderedDogsCopy = [...state.allDogscopy]
+
+      switch (action.payload){
+        case "A":
+          orderedDogs?.sort((a,b)=> a.name.localeCompare(b.name))
+          break;
+        case "D":
+          orderedDogs?.sort((a,b)=> b.name.localeCompare(a.name))
+          break;
+        
+
+      }
+      return {
+        ...state, 
+        allDogs: orderedDogs,
+        allDogscopy: orderedDogsCopy,
+        orderAndFilter:{
+            ...state.orderAndFilter,
+            order: action.payload ? action.payload : 'A',
+        },
+    }
     default:
       return state;
   }
