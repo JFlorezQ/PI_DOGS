@@ -30,7 +30,10 @@ export function getbyID(id) {
         payload: response.data
       });
     } catch (error) {
-      console.error("Error en la solicitud:", error);}}}
+      console.error("Error en la solicitud:", error);
+    }
+  }
+}
 
 export function getbyName(name) {
   return async function (dispatch) {
@@ -68,39 +71,39 @@ export function gettemperament() {
 
 export function orderDogs(order) {
   return function (dispatch) {
-      dispatch({
-        type: ORDER,
-        payload: order,
-      });
+    dispatch({
+      type: ORDER,
+      payload: order,
+    });
   };
 }
 
 export function filterbyTemp(temperament) {
   return function (dispatch) {
-      dispatch({
-        type: FILTER_BY_TEMP,
-        payload: temperament,
-      });
+    dispatch({
+      type: FILTER_BY_TEMP,
+      payload: temperament,
+    });
   };
 }
 
 
 export function filterbyOrigin(created) {
   return function (dispatch) {
-      dispatch({
-        type: FILTER_BY_ORIGIN,
-        payload: created,
-      });
+    dispatch({
+      type: FILTER_BY_ORIGIN,
+      payload: created,
+    });
   };
 }
 
 
 export function filterbyLifespan(lifespan) {
   return function (dispatch) {
-      dispatch({
-        type: FILTER_BY_LIFESPAN,
-        payload: lifespan,
-      });
+    dispatch({
+      type: FILTER_BY_LIFESPAN,
+      payload: lifespan,
+    });
   };
 }
 

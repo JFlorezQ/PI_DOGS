@@ -8,7 +8,7 @@ function Searchbar() {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
-useEffect(() => {
+  useEffect(() => {
     // Verificar si el input no está en blanco antes de realizar la búsqueda
     if (input.trim() !== "") {
       dispatch(getbyName(input));
