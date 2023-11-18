@@ -19,14 +19,16 @@ function Filterbar() {
       dispatch(filterbyTemp("All")); // Establece el valor inicial
     }, [dispatch]);
 
-
-  console.log(temperament)
   const handleOrder = (e)=>{
     dispatch(orderDogs(e.target.value))
   }
 
   const handleFilterByTemperament = (e)=>{
     dispatch(filterbyTemp(e.target.value))
+  }
+
+  const handleFilterbyOrigin = (e)=>{
+    dispatch(filterbyOrigin(e.target.value))
   }
 
 
@@ -36,6 +38,8 @@ function Filterbar() {
       <select name="order" value={order} onChange={handleOrder}>
                     <option value="A">A-Z</option>
                     <option value="Z">Z-A</option>
+                    <option value = "minweight"> peso minimo </option>
+                    <option value = "maxweight"> peso maximo </option>
       </select>
 
       <select name="filterbyTemperament" value={temperamentFilter} onChange={handleFilterByTemperament}>
@@ -44,11 +48,14 @@ function Filterbar() {
   <option value={temperamentItem.name} key={temperamentItem.name}>
     {String(temperamentItem.name).toUpperCase()}
   </option>
-))}
+))}    </select>
 
-
-
-      </select>
+<select name="filterbyOrigin" value={originFilter} onChange={handleFilterbyOrigin}>
+        <option value="All"> All</option>
+        <option value="Api"> Api</option>
+        <option value="Created"> Created</option>
+        
+   </select>
          
     </div>
   )

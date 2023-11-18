@@ -21,7 +21,7 @@ function rootReducer(state = initialState, action) {
     case GET_BY_NAME:
       return {
         ...state,
-        dogsName: action.payload,
+        dogsName: action.payload
       };
 
     case GET_TEMPERAMENT:
@@ -40,6 +40,54 @@ function rootReducer(state = initialState, action) {
         case "Z":
           orderedDogs?.sort((a, b) => b.name.localeCompare(a.name))
           break;
+        case "minweight":
+          orderedDogs?.sort((a, b) => {
+            let pesoA;
+            let pesoB;
+            if (!a.weightMetric) {
+              pesoA = a.weightMetric?.split(' ')
+              console.log(pesoA)
+              pesoA = pesoA[0]
+            } else {
+              pesoA = a.weightMetric?.split(' ');
+              pesoA = pesoA[0]
+            }
+            if (!b.weightMetric) {
+              pesoB = a.weightMetric?.split(' ')
+              console.log(pesoB)
+              pesoB = pesoB[0]
+            } else {
+              pesoB = b.weightMetric?.split(' ');
+              pesoB = pesoB[0]
+            }
+            return parseInt(pesoA) - parseInt(pesoB)
+          })
+
+          break;
+          case "maxweight":
+            orderedDogs?.sort((a, b) => {
+              let pesoA;
+              let pesoB;
+              if (!a.weightMetric) {
+                pesoA = a.weightMetric?.split(' ')
+                console.log(pesoA)
+                pesoA = pesoA[0]
+              } else {
+                pesoA = a.weightMetric?.split(' ');
+                pesoA = pesoA[0]
+              }
+              if (!b.weightMetric) {
+                pesoB = a.weightMetric?.split(' ')
+                console.log(pesoB)
+                pesoB = pesoB[0]
+              } else {
+                pesoB = b.weightMetric?.split(' ');
+                pesoB = pesoB[0]
+              }
+              return parseInt(pesoB) - parseInt(pesoA)
+            })
+  
+            break;
       }
       return {
         ...state,
@@ -51,28 +99,56 @@ function rootReducer(state = initialState, action) {
         },
       }
     case FILTER_BY_TEMP:
-      if (action.payload === "All"){
-        return{
+      if (action.payload === "All") {
+        return {
           ...state,
           allDogs: state.allDogscopy,
-          orderAndFilter:{
+          orderAndFilter: {
             ...state.orderAndFilter,
-            temperamentFilter: action.payload
+            temperamentFilter: 'All'
           }
         }
-      } else{
-        let filteredDogs = state.allDogs.filter((dog)=>dog?.temperament?.includes(action.payload))
-        return{
+      } else {
+        let filteredDogs = state.allDogs.filter((dog) => dog?.temperament?.includes(action.payload))
+        return {
           ...state,
           allDogs: filteredDogs,
-          orderAndFilter:{
+          orderAndFilter: {
             ...state.orderAndFilter,
             temperamentFilter: action.payload,
-            originFilter: 'All'
           }
         }
-        
+
       }
+      case FILTER_BY_ORIGIN:
+        if (action.payload === "All") {
+          return {
+            ...state,
+            allDogs: state.allDogscopy,
+            orderAndFilter: {
+              ...state.orderAndFilter,
+              originFilter: 'All'
+
+            }
+          }
+        } else {
+          let filteredDogs = []
+          if (action.payload === 'Api'){
+             filteredDogs = state.allDogs.filter((dog)=> typeof(dog?.id)==='number')}
+          else if (action.payload === 'Created'){
+            filteredDogs = state.allDogs.filter((dog)=> typeof(dog?.id)==='string')
+          }
+          state.allDogs.filter((dog) => dog?.temperament?.includes(action.payload))
+          return {
+            ...state,
+            allDogs: filteredDogs,
+            orderAndFilter: {
+              ...state.orderAndFilter,
+              originFilter: action.payload,
+            }
+          }
+
+        }
     default:
       return state;
   }
