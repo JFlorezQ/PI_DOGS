@@ -1,0 +1,45 @@
+/* Navbar.css */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #B5C5D7;; /* Cambia el color de fondo según tus preferencias */
+    padding: 10px;
+    box-shadow: 0px 0px 10px #B5C5D7;; /* Agregado sombra para un aspecto más elevado */
+  }
+  
+  .botones {
+    display: flex;
+    gap: 10px; /* Espaciado entre botones */
+  }
+  
+  .boton {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 5px; /* Bordes redondeados para los botones */
+    color: black;
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transición de colores al pasar el ratón */
+  }
+  
+  .boton:hover {
+    color: #3498db; /* Cambia el color al pasar el ratón */
+  }
+  
+  .link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Estilo para la barra de búsqueda */
+  /* Ajusta el ancho según tus necesidades */
+  /* Puedes ajustar la altura, el color y otros estilos según tus preferencias */
+  .Searchbar {
+    width: 50%;
+  }
+  
+  

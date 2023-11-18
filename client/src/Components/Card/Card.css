@@ -1,12 +1,36 @@
+/* Card.css */
+
+/* Agrega estos estilos para el NavLink */
+.nav-link {
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Hereda el color del texto del contenedor padre */
+}
+
 .cardcontainer {
-    border: 1px solid black;
-    padding: 10px; /* Ajusta el relleno según tus necesidades */
-    width: 30%; /* El ancho será el 20% del contenedor */
-    height: 30%; /* Altura fija de 15 px */
-  }
-  .cardcontainer img {
-    width: 20%; /* El ancho será el 20% del contenedor */
-    height: 20%; /* Altura fija de 15 px */
-     /* Ajusta la forma de la imagen según sea necesario */
-    margin: 5px; /* Ajusta el margen según tus necesidades */
-  }
+  box-sizing: border-box;
+  width: 300px; /* Cambiado a porcentaje para establecer un margen interno del 5% */
+  height: 420px;
+  margin: 10px auto; /* Margen externo y centrado horizontalmente */
+  border: 5px solid #B5C5D7;
+  border-radius: 10px;
+  background-color: #F4D9EC; /* Variante del rosado para el fondo */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; /* Margen interno del 5% */
+}
+
+.cardcontainer img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px; /* Bordes redondeados para la imagen */
+}
+
+.texto {
+  margin: 10px 0;
+}
+

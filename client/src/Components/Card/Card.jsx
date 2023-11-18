@@ -17,12 +17,12 @@ function Card({dog}) {
  
   return (
     <div className='cardcontainer'>
-      <NavLink to={`/detail/${id}`} >
-         {<img className="image" src={image} alt={name} /> }
-         <h2 className="texto"> {name}</h2>
-         <h2 className="texto">Temperament: {temperament} </h2>
-         <h2 className='texto'> Peso: { weightMetric} </h2>
-    </NavLink> 
+      <NavLink className= "nav-link" to={`/detail/${id}`} >
+         <img className="image" src={image} alt={name} ></img> 
+         <h1 className="texto"> {name}</h1>
+         <p className="texto"> {temperament} </p>
+          <p> { weightMetric} </p> 
+    </NavLink>  
          
     </div>
   )

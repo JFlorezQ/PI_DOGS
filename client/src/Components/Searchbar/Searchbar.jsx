@@ -1,3 +1,4 @@
+import "./Searchbar.css"
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getbyName } from "../../redux/actions";
@@ -16,7 +17,7 @@ function Searchbar() {
   }, [dispatch, input]);
 
   return (
-    <div>
+    <div className="Searchbar">
       <FaSearch id="search-icon" />
       <input
         placeholder='type to search...'

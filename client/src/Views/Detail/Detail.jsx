@@ -1,3 +1,4 @@
+import './Detail.css';
 import  {useState,  useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -5,14 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getbyID } from "../../redux/actions";
 
 function Detail() {
- /* const { id } = useParams();
-  const dispatch = useDispatch();
-  const dogsID = useSelector((state) => state.id);
-
-  useEffect(() => {
-    // para que me mande la info cuando el componente está en su fase mount
-    dispatch(getbyID(id));
-  }, [dispatch, id]);*/
   const {id} = useParams()
   const [dogsID, setDogsID] = useState({});
   useEffect(() => {
@@ -26,17 +19,20 @@ function Detail() {
       return setDogsID({});
    }, [id]);
   return (
-    <div>
+    <div className="detail-container">
       <>
-        <img className="image" src={dogsID?.image} alt={dogsID?.name} />
-        <h2 className='texto'> id: {dogsID?.id} </h2>
-        <h2 className="texto"> Name: {dogsID?.name}</h2>
-        <h2 className="texto">Temperament: {dogsID?.temperament} </h2>
-        <h2 className='texto'> Peso metrico: { dogsID?.weightMetric} </h2>
-        <h2 className='texto'> Peso imperial: { dogsID?.weightImperial} </h2>
-        <h2 className='texto'> Altura metrico: { dogsID?.heightMetric} </h2>
-        <h2 className='texto'> Altura imperial: { dogsID?.heightImperial} </h2>
-        <h2 className='texto'> Tiempo de vida: { dogsID?.life_span} </h2>
+        <img className="image-container" src={dogsID?.image} alt={dogsID?.name} />
+      <div className='texts-container'>
+         <h2 className='text-container'> id: {dogsID?.id} </h2>
+        <h2 className="text-container"> Name: {dogsID?.name}</h2>
+        <h2 className="text-container">Temperament: {dogsID?.temperament} </h2>
+        <h2 className='text-container'> Peso metrico: { dogsID?.weightMetric} </h2>
+        <h2 className='text-container'> Peso imperial: { dogsID?.weightImperial} </h2>
+        <h2 className='text-container'> Altura metrico: { dogsID?.heightMetric} </h2>
+        <h2 className='text-container'> Altura imperial: { dogsID?.heightImperial} </h2>
+        <h2 className='text-container'> Tiempo de vida: { dogsID?.life_span} </h2>
+        </div>
+
       </>
     </div>
   );

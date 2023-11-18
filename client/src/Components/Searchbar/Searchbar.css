@@ -1,0 +1,38 @@
+/* Searchbar.css */
+
+/* Estilo para el contenedor de la barra de búsqueda */
+.Searchbar {
+    display: flex;
+    align-items: center;
+    background-color: #ECDFDB;
+    border: 1px solid #B5C5D7;
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px 10px; /* Ajusta el relleno según tus necesidades */
+    box-shadow: 0px 0px 8px #B5C5D7; /* Sombreado */
+    width: 400px;
+    height: 30px;
+  }
+  
+  /* Estilo para el icono de búsqueda */
+  #search-icon {
+    margin-right: 8px; /* Espacio entre el icono y el input */
+    color: #B5C5D7;; /* Color del icono, puedes ajustarlo según tus preferencias */
+  }
+  
+  /* Estilo para el input de búsqueda */
+  input {
+    border: none;
+    outline: none;
+    flex: 1; /* Hace que el input ocupe todo el espacio disponible */
+    font-size: 16px;
+    padding: 8px; /* Ajusta el relleno según tus necesidades */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #ECDFDB;
+    height: 20px;
+  }
+  
+  /* Cambia el color del texto dentro del input */
+  input::placeholder {
+    color: #9ca9b9; /* Puedes ajustar el color según tus preferencias */
+  }
+  
