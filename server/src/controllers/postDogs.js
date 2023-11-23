@@ -1,52 +1,45 @@
 const { Dog, Temperament } = require('../db.js');
 
-const postDogs = async (req, res) => {
-  try {
-    const { name, weight, height, reference_image_id, life_span, temperaments } = req.body;
+const postDogs = async (dog) => {
+  if (
+    !dog.name ||
+    !dog.reference_image_id ||
+    !dog.weightImperial ||
+    !dog.weightMetric ||
+    !dog.life_span ||
+    !dog.temperament ||
+    !dog.heightImperial ||
+    !dog.heightMetric
+  ) {
+    throw new Error(`Faltan datos para crear el perro: ${dog.name}, ${dog.reference_image_id}, ${dog.weightImperial}, ${dog.weightMetric}, ${dog.life_span}, ${dog.temperament}, ${dog.heightImperial}, ${dog.heightMetric}`);
+  }
 
-    // Crea el conductor en la base de datos
+  try {
     const newDog = await Dog.create({
-      name: name,
-      weight: {
-        metric: weight.metric,
-        imperial: weight.imperial
-      },
-      height: {
-        metric: height.metric,
-        imperial: height.imperial
-      },
-      life_span: life_span,
-      reference_image_id: reference_image_id,
+      reference_image_id: dog.reference_image_id,
+      name: dog.name,
+      weightImperial: dog.weightImperial,
+      weightMetric: dog.weightMetric,
+      heightMetric: dog.heightMetric,
+      heightImperial: dog.heightImperial,
+      life_span: dog.life_span,
     });
- 
-    // Verifica si 'Temperaments' es un arreglo (lista de temperaments) o un valor único (un temperament)
-    if (Array.isArray(temperaments)) {
-      // Relaciona el conductor con los temperaments proporcionados
-      for (const nombretemperament of temperaments) {
-        const temperamentEncontrado = await Temperament.findOne({
-          where: {
-            name: nombretemperament,
-          },
-        });
-        if (equipoEncontrado) {
-          await newDog.addTemperament(equipoEncontrado);
-        }
-      }
-    } else {
-      // 'tempeTemperaments' es un valor único, así que relaciona el conductor con ese equipo
-      const temperamentEncontrado = await Temperament.findOne({
-        where: {
-          name: temperaments,
-        },
+
+    // Asociar temperamentos al perro (si se proporciona)
+    if (dog.temperament) {
+      const temperamentList = Array.isArray(dog.temperament) ? dog.temperament : [dog.temperament];
+      const temperaments = await Temperament.findAll({
+        where: { name: temperamentList },
       });
-      if (temperamentEncontrado) {
-        await newDog.addTemperament(temperamentEncontrado);
-      }
+
+      await newDog.setTemperaments(temperaments);
     }
 
-    return res.status(201).json({ message: 'Conductor creado con éxito' });
+    const allDogs = await Dog.findAll();
+    console.log(allDogs);
+    return allDogs;
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    throw new Error('No se pudo crear el perro');
   }
 };
 

@@ -46,16 +46,17 @@ const getDogByName = async (req, res) => {
       return res.status(404).json({ error: `No se encontraron razas con el nombre: ${name}` });
     }
 
+    
     const dogsName = first15MatchingDogs.map((dog) => ({
       id: dog.id,
       image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
       name: dog.name,
       // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
-      weightMetric: dog.weight ? `${dog.weight.metric} kg` : "Raza sin peso",
-      weightImperial: dog.weight ? `${dog.weight.imperial} lb` : "Raza sin peso",
+      weightMetric: dog.weight ? `${dog.weight.metric} kg` : `${dog.weightMetric} kg` || "Raza sin peso" ,
+      weightImperial: dog.weight ? `${dog.weight.imperial} lb` : `${dog.weightImperial}lb ` || "Raza sin peso",
       temperament: dog.temperament || "Raza sin temperamento",
-      heightMetric: dog.height ? `${dog.height.metric} m` : "Raza sin altura",
-      heightImperial: dog.height ? `${dog.height.imperial} ft` : "Raza sin altura",
+      heightMetric: dog.height ? `${dog.height.metric} m` : `${dog.heightMetric} cm` || "Raza sin altura",
+      heightImperial: dog.height ? `${dog.height.imperial} ft` : `${dog.heightImperial} ft`|| "Raza sin altura",
       life_span: dog.life_span
     }));
 

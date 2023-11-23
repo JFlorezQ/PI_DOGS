@@ -8,7 +8,8 @@ export const ORDER = 'ORDER'
 export const FILTER_BY_TEMP = 'FILTER_BY_TEMP'
 // export const CLEAR_DOGS = 'CLEAR_DOG'
 export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN'
-export const FILTER_BY_LIFESPAN = 'FILTER_BY_LIFESPAN'
+export const  POST_DOG_FAILURE = 'POST_DOG_FAILURE'
+export const POST_DOG_SUCCESS = 'POST_DOG_SUCCESS'
 
 export function getDogs() {
   return async function (dispatch) {
@@ -96,28 +97,40 @@ export function filterbyOrigin(created) {
     });
   };
 }
-
-
-export function filterbyLifespan(lifespan) {
-  return function (dispatch) {
-    dispatch({
-      type: FILTER_BY_LIFESPAN,
-      payload: lifespan,
-    });
-  };
-}
-
-
-
 export function postDog(input) {
   return async function (dispatch) {
     try {
       const url = `http://localhost:1030/dogs`;
-      await axios.post(url, input);
-      console.log(`Solicitud POST realizada a: ${url}`);
-      console.log(input)
+      const response = await axios.post(url, input);
+      
+      // Verificar si la solicitud POST fue exitosa
+      if (response.status === 201) {
+        console.log(`Solicitud POST exitosa a: ${url}`);
+        console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor si es necesario
+
+        // Despachar una acción indicando que la creación fue exitosa
+        dispatch({
+          type: POST_DOG_SUCCESS,
+          payload: response.data,
+        });
+      } else {
+        console.error(`Error en la solicitud POST a: ${url}`);
+        console.error(response.data); // Aquí puedes hacer algo con la respuesta de error si es necesario
+
+        // Despachar una acción indicando que la creación falló
+        dispatch({
+          type: POST_DOG_FAILURE,
+          payload: response.data,
+        });
+      }
     } catch (error) {
       console.error("Error en la solicitud POST:", error);
+
+      // Despachar una acción indicando que la creación falló
+      dispatch({
+        type: POST_DOG_FAILURE,
+        payload: error.message,
+      });
     }
   };
 }

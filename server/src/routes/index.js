@@ -31,7 +31,14 @@ router.get("/temperaments", (req,res) =>{gettemperaments(req, res)})
 
 //POST | /Dogs
 
-router.post("/dogs", (req,res) =>{postDogs(req, res)})
+router.post("/dogs", async (req,res) =>{
+    const perro = req.body
+    try {
+        const dog = await postDogs(perro)
+        return res.status(201).json(dog)
+    } catch (error) {
+        return res.status(400).json(error.message)
+    }})
 
 module.exports = router;
 

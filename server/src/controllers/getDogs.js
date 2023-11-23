@@ -4,7 +4,8 @@ IMPORTANTE: Si un dog no tiene imagen, deberás colocarle una por defecto 🖼�
 Debe traer tanto de la api como de la base de datos*/
 
 const axios = require('axios');
-const { Dog } = require('../db.js')
+const { Dog, DogTemperament } = require('../db.js');
+
 const { YOUR_API_KEY } = process.env;
 const URL = `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`;
 
@@ -26,7 +27,9 @@ const getDogs = async (req, res) => {
 
         const dogsAPI = apiDogs.map((dog) => ({
             id: dog.id,
-            image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
+            image: !dog.reference_image_id
+            ? "https://img.freepik.com/vector-premium/ilustracion-perro-lindo-perro-kawaii-chibi-estilo-dibujo-vectorial-dibujos-animados-perro_622550-74.jpg"
+            : `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
             name: dog.name,
             // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
             weightMetric: dog.weight ? `${dog.weight.metric} kg` : "Raza sin peso",
@@ -41,23 +44,42 @@ const getDogs = async (req, res) => {
         // Consultar los datos del modelo Dog
 
         const databaseDogs = await Dog.findAll();
-
+        const databaseDogsTemperaments = await  DogTemperament.findAll();
+        
+        // Crear un mapa para asociar temperamentos con los perros correspondientes
+        const temperamentsMap = new Map();
+        databaseDogsTemperaments.forEach((dogTemperament) => {
+          if (!temperamentsMap.has(dogTemperament.dogId)) {
+            temperamentsMap.set(dogTemperament.dogId, []);
+          }
+          temperamentsMap.get(dogTemperament.dogId).push(dogTemperament.temperamentId);
+        });
+        
         // Mapear los datos de la base de datos
-
-        const dogsDatabase = databaseDogs.map((dog) => ({
+        const dogsDatabase = databaseDogs.map((dog) => {
+          const temperamentsIds = temperamentsMap.get(dog.id) || [];
+          const temperaments = temperamentsIds.map((tempId) => {
+            // Aquí deberías buscar en tu base de datos o en la lista de temperamentos para obtener los nombres de los temperamentos
+            // tempId es el ID del temperamento asociado al perro
+            // Puedes utilizar find u otra lógica según cómo estén estructurados tus datos
+            // Supongamos que tienes una lista de temperamentos llamada 'allTemperaments'
+            const associatedTemperament = databaseDogsTemperaments.find((temp) => temp.id === tempId);
+            return associatedTemperament ? associatedTemperament.name : "Raza sin temperamento";
+          });
+        
+          return {
             id: dog.id,
-            image: dog.reference_image_id,
+            image: dog.reference_image_id || "https://img.freepik.com/vector-premium/ilustracion-perro-lindo-perro-kawaii-chibi-estilo-dibujo-vectorial-dibujos-animados-perro_622550-74.jpg",
             name: dog.name,
-            // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
-            weightMetric: dog.weight ? `${dog.weight.metric} kg` : "Raza sin peso",
-            weightImperial: dog.weight ? `${dog.weight.imperial} lb` : "Raza sin peso",
-            temperament: dog.temperament || "Raza sin temperamento",
-            heightMetric: dog.height ? `${dog.height.metric} m` : "Raza sin altura",
-            heightImperial: dog.height ? `${dog.height.imperial} ft` : "Raza sin altura",
+            weightMetric: `${dog.weightMetric} kg` || "Raza sin peso",
+            weightImperial: `${dog.weightImperial} lb` || "Raza sin peso",
+            temperament: temperaments || "Raza sin temperamento",
+            heightMetric: `${dog.heightMetric} cm` || "Raza sin altura",
+            heightImperial: `${dog.heightImperial} ft` || "Raza sin altura",
             life_span: dog.life_span
-        }))
-
-
+          };
+        });
+        
         // Combinar datos de la API y la base de datos
 
         const dogs = [...dogsAPI, ...dogsDatabase];

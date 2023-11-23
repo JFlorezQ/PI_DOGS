@@ -54,15 +54,15 @@ const getDogById = async (req, res) => {
 
       dog = {
         id: dogFromDB.id,
-        image: dogFromDB.reference_image_id,
-        name: dogFromDB.name,
-        // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
-        weightMetric: dogFromDB.weight ? `${dogFromDB.weight.metric} kg` : "Raza sin peso",
-        weightImperial: dogFromDB.weight ? `${dogFromDB.weight.imperial} lb` : "Raza sin peso",
-        temperament: dogFromDB.temperament || "Raza sin temperamento",
-        heightMetric: dogFromDB.height ? `${dogFromDB.height.metric} m` : "Raza sin altura",
-        heightImperial: dogFromDB.height ? `${dogFromDB.height.imperial} ft` : "Raza sin altura",
-        life_span: dogFromDB.life_span
+            image: dogFromDB.reference_image_id || "https://img.freepik.com/vector-premium/ilustracion-perro-lindo-perro-kawaii-chibi-estilo-dibujo-vectorial-dibujos-animados-perro_622550-74.jpg",
+            name: dogFromDB.name,
+            // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
+            weightMetric: `${dogFromDB.weightMetric} kg`|| "Raza sin peso",
+            weightImperial: `${dogFromDB.weightImperial}lb ` || "Raza sin peso",
+            temperament: dogFromDB.temperament || "Raza sin temperamento",
+            heightMetric:  `${dogFromDB.heightMetric} cm` || "Raza sin altura",
+            heightImperial: `${dogFromDB.heightImperial} ft`|| "Raza sin altura",
+            life_span: dogFromDB.life_span
       };
     }
 

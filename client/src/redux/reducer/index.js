@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_BY_NAME, GET_TEMPERAMENT, GET_BY_ID, ORDER, FILTER_BY_TEMP, FILTER_BY_LIFESPAN, FILTER_BY_ORIGIN } from "../actions";
+import { GET_DOGS, GET_BY_NAME, GET_TEMPERAMENT, GET_BY_ID, ORDER, FILTER_BY_TEMP, FILTER_BY_ORIGIN, POST_DOG_SUCCESS, POST_DOG_FAILURE } from "../actions";
 
 let initialState = {
   allDogs: [], allDogscopy: [], temperament: [], idDog: [],
@@ -19,9 +19,12 @@ function rootReducer(state = initialState, action) {
         idDog: action.payload
       }
     case GET_BY_NAME:
-      return {
-        ...state,
-        dogsName: action.payload
+      
+        if(action.payload === ""){
+          return {...state}}
+        else{
+          return{...state,
+        allDogs: action.payload,}
       };
 
     case GET_TEMPERAMENT:
@@ -149,9 +152,23 @@ function rootReducer(state = initialState, action) {
           }
 
         }
-    default:
-      return state;
-  }
+        case POST_DOG_SUCCESS:
+          // Manejar el éxito de la creación de un perro
+          return {
+            ...state,
+            allDogs: [...state.allDogs, action.payload],
+            allDogscopy: [...state.allDogscopy, action.payload],
+          };
+    
+        case POST_DOG_FAILURE:
+          // Manejar el fallo de la creación de un perro
+          console.error("Error en la solicitud POST:", action.payload);
+          // Puedes querer actualizar el estado con un mensaje de error
+          return state;
+    
+        default:
+          return state;
+      }
 }
 
 export default rootReducer;

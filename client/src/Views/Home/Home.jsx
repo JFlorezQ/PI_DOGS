@@ -50,11 +50,7 @@ function Home() {
         </button>
       </div>
 
-      {dogsName && dogsName.length > 0 ? (
-        <Cards allDogs={dogsName} />
-      ) : (
         <Cards allDogs={currentDogs} />
-      )}
 
 
 

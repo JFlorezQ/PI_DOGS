@@ -20,30 +20,22 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    weight: {
-      type: DataTypes.JSONB, // Utilizamos JSONB para almacenar datos estructurados
-      allowNull: false,
-      get() {
-        return JSON.parse(this.getDataValue('weight')); // Convertimos la cadena JSON a objeto JavaScript
-      },
-      set(value) {
-        this.setDataValue('weight', JSON.stringify(value)); // Convertimos el objeto JavaScript a cadena JSON antes de almacenarlo
-      }
-    },
-    height: {
-      type: DataTypes.JSONB, // Utilizamos JSONB para almacenar datos estructurados
-      allowNull: false,
-      get() {
-        return JSON.parse(this.getDataValue('height')); // Convertimos la cadena JSON a objeto JavaScript
-      },
-      set(value) {
-        this.setDataValue('height', JSON.stringify(value)); // Convertimos el objeto JavaScript a cadena JSON antes de almacenarlo
-      }
-    },
-    temperament: {
+    weightMetric: {
       type: DataTypes.STRING,
       allowNull: false
     },
+    weightImperial: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    heightMetric: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    heightImperial: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, { timestamps: false });
 
   return Dog;

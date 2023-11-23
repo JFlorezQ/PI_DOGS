@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+
 .pagination {
   display: flex;
   align-items: center;
@@ -16,24 +17,3 @@
   font-size: 12px;
 }
 
-button {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  padding: 8px 12px;
-  border: 1px solid #3498db; /* Color del borde inicial */
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-}
-
-button:hover {
-  background-color: #3498db; /* Color de fondo al pasar el ratón */
-  color: #fff; /* Color del texto al pasar el ratón */
-  border: 1px solid #fff; /* Color del borde al pasar el ratón */
-}
-
-button:disabled {
-  opacity: 0.5; /* Opacidad para botones deshabilitados */
-  cursor: not-allowed;
-}
