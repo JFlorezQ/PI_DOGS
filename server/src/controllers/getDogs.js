@@ -59,13 +59,9 @@ const getDogs = async (req, res) => {
         const dogsDatabase = databaseDogs.map((dog) => {
           const temperamentsIds = temperamentsMap.get(dog.id) || [];
           const temperaments = temperamentsIds.map((tempId) => {
-            // Aquí deberías buscar en tu base de datos o en la lista de temperamentos para obtener los nombres de los temperamentos
-            // tempId es el ID del temperamento asociado al perro
-            // Puedes utilizar find u otra lógica según cómo estén estructurados tus datos
-            // Supongamos que tienes una lista de temperamentos llamada 'allTemperaments'
             const associatedTemperament = databaseDogsTemperaments.find((temp) => temp.id === tempId);
             return associatedTemperament ? associatedTemperament.name : "Raza sin temperamento";
-          });
+          });//
         
           return {
             id: dog.id,
@@ -73,7 +69,7 @@ const getDogs = async (req, res) => {
             name: dog.name,
             weightMetric: `${dog.weightMetric} kg` || "Raza sin peso",
             weightImperial: `${dog.weightImperial} lb` || "Raza sin peso",
-            temperament: temperaments || "Raza sin temperamento",
+            temperament: dog.temperament || "Raza sin temperamento",
             heightMetric: `${dog.heightMetric} cm` || "Raza sin altura",
             heightImperial: `${dog.heightImperial} ft` || "Raza sin altura",
             life_span: dog.life_span

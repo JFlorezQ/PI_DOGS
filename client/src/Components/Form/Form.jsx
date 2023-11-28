@@ -205,7 +205,7 @@ function Form() {
         </div>
         <br />
 
-         <label className="mi-titulo">Seleccionar Temperamento: </label>
+        <label className="mi-titulo">Seleccionar Temperamento: </label>
         <select
           className="respuestas"
           name="selectedTemperament"
@@ -226,9 +226,10 @@ function Form() {
         <span>{errors?.temperament}</span>
         <br /><br />
 
-        <button className="boton" type="submit">
+        <button className="boton" type="submit" disabled={Object.values(errors).some(error => error !== "")}>
           Enviar
         </button>
+
       </form>
 
     </div>

@@ -1,6 +1,7 @@
 import './Detail.css';
 import  {useState,  useEffect } from "react";
 import axios from "axios";
+import { NavLink } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getbyID } from "../../redux/actions";
@@ -34,6 +35,9 @@ function Detail() {
         </div>
 
       </>
+      <button className="boton"> 
+      <NavLink className='link' to="/home"> Home </NavLink>
+      </button>
     </div> 
   );
 }

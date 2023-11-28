@@ -37,14 +37,14 @@ function Home() {
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1} className="boton"
         >
           Anterior
         </button>
         <h3>{currentPage} / {totalPages} </h3>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages} className="boton"
         >
           Siguiente
         </button>

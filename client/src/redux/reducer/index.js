@@ -12,6 +12,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         allDogs: action.payload,
         allDogscopy: action.payload,
+        orderAndFilter: { order: 'A', temperamentFilter: 'All', originFilter: 'all' }
       };
     case GET_BY_ID:
       return {
@@ -24,7 +25,8 @@ function rootReducer(state = initialState, action) {
           return {...state}}
         else{
           return{...state,
-        allDogs: action.payload,}
+        allDogs: action.payload,
+        orderAndFilter: { order: 'A', temperamentFilter: 'All', originFilter: 'all' }}
       };
 
     case GET_TEMPERAMENT:
@@ -112,7 +114,7 @@ function rootReducer(state = initialState, action) {
           }
         }
       } else {
-        let filteredDogs = state.allDogs.filter((dog) => dog?.temperament?.includes(action.payload))
+        let filteredDogs = state.allDogscopy.filter((dog) => dog?.temperament?.includes(action.payload))
         return {
           ...state,
           allDogs: filteredDogs,
@@ -137,11 +139,11 @@ function rootReducer(state = initialState, action) {
         } else {
           let filteredDogs = []
           if (action.payload === 'Api'){
-             filteredDogs = state.allDogs.filter((dog)=> typeof(dog?.id)==='number')}
+             filteredDogs = state.allDogscopy.filter((dog)=> typeof(dog?.id)==='number')}
           else if (action.payload === 'Created'){
-            filteredDogs = state.allDogs.filter((dog)=> typeof(dog?.id)==='string')
+            filteredDogs = state.allDogscopy.filter((dog)=> typeof(dog?.id)==='string')
           }
-          state.allDogs.filter((dog) => dog?.temperament?.includes(action.payload))
+          
           return {
             ...state,
             allDogs: filteredDogs,
