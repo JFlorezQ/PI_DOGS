@@ -26,8 +26,12 @@ const validation = (input) => {
     errors.heightMetricMax = "Por favor ingrese una altura en cm";
   }
 
-  if (!input.life_span) {
-    errors.life_span = "Por favor ingrese un tiempo de vida";
+  if (!input.life_spanMin) {
+    errors.life_spanMin = "Por favor ingrese un tiempo de vida";
+  }
+
+  if (!input.life_spanMax) {
+    errors.life_spanMax = "Por favor ingrese un tiempo de vida";
   }
 
 
@@ -38,7 +42,7 @@ const validation = (input) => {
   }
 
   // Verificar que heightMetricMax sea mayor a heightMetricMin
-  if (input.heightMetricMin >= input.heightMetricMax) {
+  if (input.heightMetricMin > input.heightMetricMax) {
     errors.heightMetricMin = "La altura máxima debe ser mayor a la altura mínima";
     errors.heightMetricMax = "La altura máxima debe ser mayor a la altura mínima";
   }
@@ -48,11 +52,22 @@ const validation = (input) => {
       errors.weightMetricMin = "El peso máximo debe ser mayor a el peso mínimo";
       errors.weightMetricMax = "El peso máximo debe ser mayor a el peso mínimo";
     }
+
+    if (input.life_spanMin >= input.life_spanMax) {
+      errors.life_spanMin = "El tiempo de vida mínimo debe ser menor al tiempo de vida máximo";
+      errors.life_spanMax = "El tiempo de vida máximo debe ser mayor al tiempo de vida mínimo";
+    }
+      
    // Verificar que sean números enteros
-   if (!Number.isInteger(Number(input.weightMetricMin))) {
+   if (!Number.isInteger(Number(input.life_spanMin))) {
+    errors.life_spanMin = "Por favor ingrese un número entero para el peso mínimo";
+  }
+  if (!Number.isInteger(Number(input.life_spanMax))) {
+    errors.life_spanMax = "Por favor ingrese un número entero para el peso mínimo";
+  }
+  if (!Number.isInteger(Number(input.weightMetricMin))) {
     errors.weightMetricMin = "Por favor ingrese un número entero para el peso mínimo";
   }
-
   if (!Number.isInteger(Number(input.weightMetricMax))) {
     errors.weightMetricMax = "Por favor ingrese un número entero para el peso máximo";
   }
@@ -64,9 +79,6 @@ const validation = (input) => {
     errors.heightMetricMax = "Por favor ingrese un número entero para la altura máximo";
   }
 
-  if (!Number.isInteger(Number(input.life_span))) {
-    errors.life_span= "Por favor ingrese un número entero para el tiempo de vida";
-  }
 
   const nameRegex = /^[a-zA-Z\s]{4,20}$/;
   if (!nameRegex.test(input.name)) {

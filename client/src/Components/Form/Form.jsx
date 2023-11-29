@@ -15,7 +15,8 @@ function Form() {
     heightMetricMin: "",
     heightMetricMax: "",
     temperament: [],
-    life_span: ""
+    life_spanMin: "",
+    life_spanMax: ""
   });
 
 
@@ -28,7 +29,8 @@ function Form() {
     heightMetricMin: "",
     heightMetricMax: "",
     temperament: "",
-    life_span: ""
+    life_spanMin: "",
+    life_spanMax: ""
   });
 
   const handleInputChange = (e) => {
@@ -88,7 +90,8 @@ function Form() {
         heightMetricMin: "",
         heightMetricMax: "",
         temperament: [],
-        life_span: ""
+        life_spanMin: "",
+        life_spanMax: ""
       });
 
       setErrors({
@@ -99,7 +102,8 @@ function Form() {
     heightMetricMin: "",
     heightMetricMax: "",
     temperament: "",
-    life_span: ""
+    life_spanMin: "",
+    life_spanMax: ""
       });
 
       setSelectedTemperament("");
@@ -187,16 +191,26 @@ function Form() {
         <span>{errors?.heightMetricMax}</span>
         <br /><br />
 
-        <label className="mi-titulo">life span:  </label>
+        <label className="mi-titulo"> Minimum life span:  </label>
         <input
           className="respuestas"
           type="text"
-          name="life_span"
+          name="life_spanMin"
           placeholder="Ingrese tiempo de vida en años"
-          value={input.life_span}
+          value={input.life_spanMin}
           onChange={handleInputChange}
         />
-        <span>{errors?.life_span}</span>
+        <span>{errors?.life_spanMin}</span>
+        <label className="mi-titulo"> Maximum life span:  </label>
+        <input
+          className="respuestas"
+          type="text"
+          name="life_spanMax"
+          placeholder="Ingrese tiempo de vida en años"
+          value={input.life_spanMax}
+          onChange={handleInputChange}
+        />
+        <span>{errors?.life_spanMax}</span>
 
         <label className="mi-titulo">Temperament: </label>
 <div>

@@ -7,7 +7,8 @@ const postDogs = async (dog) => {
       'reference_image_id',
       'weightMetricMin',
       'weightMetricMax',
-      'life_span',
+      'life_spanMin',
+      'life_spanMax',
       'temperament',
       'heightMetricMin',
       'heightMetricMax'
@@ -35,7 +36,7 @@ const postDogs = async (dog) => {
         weightMetric: `${parseInt(dog.weightMetricMin)} - ${parseInt(dog.weightMetricMax)}`,
         heightMetric: `${parseInt(dog.heightMetricMin)} - ${parseInt(dog.heightMetricMax)}`,
         heightImperial: `${parseInt(dog.heightMetricMin / 2.54)} - ${parseInt(dog.heightMetricMax / 2.54)}`,
-        life_span: `${dog.life_span} years`,
+        life_span: `${dog.life_spanMin} - ${dog.life_spanMax} years`,
       });
 
     // Asociar temperamentos al perro (si se proporciona)
