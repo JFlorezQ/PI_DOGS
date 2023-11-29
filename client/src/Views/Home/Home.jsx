@@ -9,7 +9,8 @@ function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.allDogs);
   const dogsName = useSelector((state) => state.dogsName);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector((state) => state.orderAndFilter.pagination);
+   [currentPage, setCurrentPage] = useState(1); // Descomentar esta línea
   const dogsPerPage = 8;
 
   useEffect(() => {
@@ -28,38 +29,38 @@ function Home() {
     }
   }
 
+  function resetPage() {
+    setCurrentPage(1);
+  }
 
   return (
     <div className="homecontainer">
-
-
-      <Navbar />
+      <Navbar onClick={resetPage} />
 
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1} className="boton"
+          disabled={currentPage === 1}
+          className="boton"
         >
           Anterior
         </button>
-        <h3>{currentPage} / {totalPages} </h3>
+        <h3>
+          {currentPage} / {totalPages}
+        </h3>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages} className="boton"
+          disabled={currentPage === totalPages}
+          className="boton"
         >
           Siguiente
         </button>
       </div>
 
-        <Cards allDogs={currentDogs} />
-
-
-
-
+      <Cards allDogs={currentDogs} />
     </div>
-    
-
   );
 }
 
 export default Home;
+

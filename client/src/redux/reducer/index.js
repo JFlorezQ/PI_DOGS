@@ -2,7 +2,7 @@ import { GET_DOGS, GET_BY_NAME, GET_TEMPERAMENT, GET_BY_ID, ORDER, FILTER_BY_TEM
 
 let initialState = {
   allDogs: [], allDogscopy: [], temperament: [], idDog: [],
-  orderAndFilter: { order: 'A', temperamentFilter: 'All', originFilter: 'all' }
+  orderAndFilter: { order: 'A', temperamentFilter: 'All', originFilter: 'all', pagination: 1}
 };
 
 function rootReducer(state = initialState, action) {

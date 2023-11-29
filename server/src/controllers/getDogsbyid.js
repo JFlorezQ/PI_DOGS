@@ -59,7 +59,7 @@ const getDogById = async (req, res) => {
         name: dogFromDB.name,
         weightMetric: `${dogFromDB.weightMetric} kg` || 'Raza sin peso',
         weightImperial: `${dogFromDB.weightImperial} lb` || 'Raza sin peso',
-        temperament: dogFromDB.Temperaments.map((temp) => temp.name).join(', ') || 'Raza sin temperamento',
+        temperament: (dogFromDB.Temperaments.map((temp) => temp.name) || []).slice(0, Math.ceil(dogFromDB.Temperaments.length / 2)).join(', ') || 'Raza sin temperamento',
         heightMetric: `${dogFromDB.heightMetric} cm` || 'Raza sin altura',
         heightImperial: `${dogFromDB.heightImperial} inch` || 'Raza sin altura',
         life_span: dogFromDB.life_span,

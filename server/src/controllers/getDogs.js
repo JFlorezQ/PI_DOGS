@@ -52,7 +52,7 @@ const dogsDB = dogsDatabase.map((dog) => ({
   name: dog.name,
   weightMetric: dog.weightMetric || "Raza sin peso",
   weightImperial: dog.weightImperial || "Raza sin peso",
-  temperament: dog.Temperaments.map((temp) => temp.name).join(', ') || "Raza sin temperamento",
+  temperament: (dog.Temperaments.map((temp) => temp.name) || []).slice(0, Math.ceil(dog.Temperaments.length / 2)).join(', ')|| "Raza sin temperamento",
   heightMetric: dog.heightMetric || "Raza sin altura",
   heightImperial: dog.heightImperial || "Raza sin altura",
   life_span: dog.life_span
