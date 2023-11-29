@@ -9,8 +9,7 @@ function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.allDogs);
   const dogsName = useSelector((state) => state.dogsName);
-  const currentPage = useSelector((state) => state.orderAndFilter.pagination);
-   [currentPage, setCurrentPage] = useState(1); // Descomentar esta línea
+  const [currentPage, setCurrentPage] = useState(1);
   const dogsPerPage = 8;
 
   useEffect(() => {
@@ -33,9 +32,16 @@ function Home() {
     setCurrentPage(1);
   }
 
+  function handleFilterChange() {
+    // Lógica para manejar el cambio de filtros
+    // Por ejemplo, puedes realizar una nueva búsqueda, etc.
+    // Y luego llamar a resetPage() para restablecer la página a 1
+    resetPage();
+  }
+
   return (
     <div className="homecontainer">
-      <Navbar onClick={resetPage} />
+      <Navbar onFilterChange={handleFilterChange} />
 
       <div className="pagination">
         <button
