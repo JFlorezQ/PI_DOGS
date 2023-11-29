@@ -35,8 +35,8 @@ const getDogs = async (req, res) => {
             weightMetric: dog.weight ? `${dog.weight.metric} kg` : "Raza sin peso",
             weightImperial: dog.weight ? `${dog.weight.imperial} lb` : "Raza sin peso",
             temperament: dog.temperament || "Raza sin temperamento",
-            heightMetric: dog.height ? `${dog.height.metric} m` : "Raza sin altura",
-            heightImperial: dog.height ? `${dog.height.imperial} ft` : "Raza sin altura",
+            heightMetric: dog.height ? `${dog.height.metric} cm` : "Raza sin altura",
+            heightImperial: dog.height ? `${dog.height.imperial} inch` : "Raza sin altura",
             life_span: dog.life_span
         }));
         //Recuperar datos de la DB
@@ -71,7 +71,7 @@ const getDogs = async (req, res) => {
             weightImperial: `${dog.weightImperial} lb` || "Raza sin peso",
             temperament: dog.temperament || "Raza sin temperamento",
             heightMetric: `${dog.heightMetric} cm` || "Raza sin altura",
-            heightImperial: `${dog.heightImperial} ft` || "Raza sin altura",
+            heightImperial: `${dog.heightImperial} inch` || "Raza sin altura",
             life_span: dog.life_span
           };
         });

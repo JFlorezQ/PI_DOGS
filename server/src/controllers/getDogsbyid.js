@@ -35,8 +35,8 @@ const getDogById = async (req, res) => {
         weightMetric: response.data.weight ? `${response.data.weight.metric} kg` : "Raza sin peso",
         weightImperial: response.data.weight ? `${response.data.weight.imperial} lb` : "Raza sin peso",
         temperament: response.data.temperament || "Raza sin temperamento",
-        heightMetric: response.data.height ? `${response.data.height.metric} m` : "Raza sin altura",
-        heightImperial: response.data.height ? `${response.data.height.imperial} ft` : "Raza sin altur",
+        heightMetric: response.data.height ? `${response.data.height.metric} cm` : "Raza sin altura",
+        heightImperial: response.data.height ? `${response.data.height.imperial} inch` : "Raza sin altur",
         life_span: response.data.life_span
       };
     } else if (uuidRegExp.test(id)) {
@@ -61,7 +61,7 @@ const getDogById = async (req, res) => {
             weightImperial: `${dogFromDB.weightImperial}lb ` || "Raza sin peso",
             temperament: dogFromDB.temperament || "Raza sin temperamento",
             heightMetric:  `${dogFromDB.heightMetric} cm` || "Raza sin altura",
-            heightImperial: `${dogFromDB.heightImperial} ft`|| "Raza sin altura",
+            heightImperial: `${dogFromDB.heightImperial} inch`|| "Raza sin altura",
             life_span: dogFromDB.life_span
       };
     }

@@ -10,23 +10,24 @@ function Form() {
   const [input, setInput] = useState({
     name: "",
     reference_image_id: "",
-    weightMetric: "",
-    weightImperial: "",
-    heightImperial: "",
+    weightMetricMin: "",
+    weightMetricMax: "",
+    heightMetricMin: "",
+    heightMetricMax: "",
     temperament: [],
-    heightMetric: "",
     life_span: ""
   });
+
 
   const [selectedTemperament, setSelectedTemperament] = useState("");
   const [errors, setErrors] = useState({
     name: "",
     reference_image_id: "",
-    weightMetric: "",
+    weightMetricMin: "",
+    weightMetricMax: "",
+    heightMetricMin: "",
+    heightMetricMax: "",
     temperament: "",
-    weightImperial: "",
-    heightImperial: "",
-    heightMetric: "",
     life_span: ""
   });
 
@@ -82,23 +83,23 @@ function Form() {
       setInput({
         name: "",
         reference_image_id: "",
-        weightMetric: "",
+        weightMetricMin: "",
+        weightMetricMax: "",
+        heightMetricMin: "",
+        heightMetricMax: "",
         temperament: [],
-        heightMetric: "",
-        life_span: "",
-        weightImperial: "",
-        heightImperial: "",
+        life_span: ""
       });
 
       setErrors({
         name: "",
-        reference_image_id: "",
-        weightMetric: "",
-        temperament: "",
-        weightImperial: "",
-        heightImperial: "",
-        heightMetric: "",
-        life_span: ""
+    reference_image_id: "",
+    weightMetricMin: "",
+    weightMetricMax: "",
+    heightMetricMin: "",
+    heightMetricMax: "",
+    temperament: "",
+    life_span: ""
       });
 
       setSelectedTemperament("");
@@ -136,54 +137,54 @@ function Form() {
         <span>{errors?.reference_image_id}</span>
         <br /><br />
 
-        <label className="mi-titulo">Weight metric:  </label>
+        <label className="mi-titulo">Minimum Weight (kg):  </label>
         <input
           className="respuestas"
           type="text"
-          name="weightMetric"
+          name="weightMetricMin"
           placeholder="Ingrese el peso en kg"
-          value={input.weightMetric}
+          value={input.weightMetricMin}
           onChange={handleInputChange}
         />
-        <span>{errors?.weightMetric}</span>
+        <span>{errors?.weightMetricMin}</span>
         <br /><br />
 
-        <label className="mi-titulo">Weight Imperial:  </label>
+        <label className="mi-titulo">Maximum Weight (kg):  </label>
         <input
           className="respuestas"
           type="text"
-          name="weightImperial"
+          name="weightMetricMax"
           placeholder="Ingrese el peso en lb"
-          value={input.weightImperial}
+          value={input.weightMetricMax}
           onChange={handleInputChange}
 
         />
-        <span>{errors?.weightImperial}</span>
+        <span>{errors?.weightMetricMax}</span>
         <br /><br />
 
-        <label className="mi-titulo">Height metric:  </label>
+        <label className="mi-titulo">Minimum Height (cm):  </label>
         <input
           className="respuestas"
           type="text"
-          name="heightMetric"
+          name="heightMetricMin"
           placeholder="Ingrese la altura en cm"
-          value={input.heightMetric}
+          value={input.heightMetricMin}
           onChange={handleInputChange}
 
         />
-        <span>{errors?.heightMetric}</span>
+        <span>{errors?.heightMetricMin}</span>
         <br /><br />
 
-        <label className="mi-titulo">Height Imperial:  </label>
+        <label className="mi-titulo">Maximum Height (cm):  </label>
         <input
           className="respuestas"
           type="text"
-          name="heightImperial"
+          name="heightMetricMax"
           placeholder="Ingrese la altura en pies"
-          value={input.heightImperial}
+          value={input.heightMetricMax}
           onChange={handleInputChange}
         />
-        <span>{errors?.heightImperial}</span>
+        <span>{errors?.heightMetricMax}</span>
         <br /><br />
 
         <label className="mi-titulo">life span:  </label>
@@ -191,37 +192,40 @@ function Form() {
           className="respuestas"
           type="text"
           name="life_span"
-          placeholder="Ingrese tiempo de vida"
+          placeholder="Ingrese tiempo de vida en años"
           value={input.life_span}
           onChange={handleInputChange}
         />
         <span>{errors?.life_span}</span>
 
         <label className="mi-titulo">Temperament: </label>
-        <div>
-          {input.temperament.map((temp, index) => (
-            <span key={index} className="temperament-tag">{temp}</span>
-          ))}
-        </div>
-        <br />
+<div>
+  {input.temperament.map((temp, index) => (
+    <span key={index} className="temperament-tag">{temp}</span>
+  ))}
+</div>
+<br />
 
-        <label className="mi-titulo">Seleccionar Temperamento: </label>
-        <select
-          className="respuestas"
-          name="selectedTemperament"
-          value={selectedTemperament}
-          onChange={handleInputChange}
-        >
-          <option value="">Seleccionar...</option>
-          {temperaments.map((temp) => (
-            <option key={temp.id} value={temp.name}>
-              {temp.name}
-            </option>
-          ))}
-        </select>
-        <button type="button" onClick={handleAddSelectedTemperament}>
-          Agregar
-        </button>
+<label className="mi-titulo">Seleccionar Temperamento: </label>
+<select
+  className="respuestas"
+  name="selectedTemperament"
+  value={selectedTemperament}
+  onChange={handleInputChange}
+>
+  <option value="">Seleccionar...</option>
+  {temperaments
+    .filter((temp) => !input.temperament.includes(temp.name))
+    .map((temp) => (
+      <option key={temp.id} value={temp.name}>
+        {temp.name}
+      </option>
+    ))}
+</select>
+<button type="button" onClick={handleAddSelectedTemperament}>
+  Agregar
+</button>
+
         <br /><br />
         <span>{errors?.temperament}</span>
         <br /><br />
