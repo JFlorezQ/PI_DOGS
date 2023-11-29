@@ -1,5 +1,4 @@
-const { Dog, Temperament } = require('../db.js');
-
+const { Dog, Temperament, DogTemperament } = require('../db.js');
 const postDogs = async (dog) => {
   try {
     // Verificar si faltan datos
@@ -43,7 +42,18 @@ const postDogs = async (dog) => {
     }
 
     // Obtener y devolver todos los perros
-    const allDogs = await Dog.findAll();
+    const allDogs = await Dog.findAll({
+      include: [
+        {
+          model: Temperament,
+          attributes: ['name'],
+          through: {
+            model: DogTemperament,
+            attributes: [],
+          },
+        },
+      ],
+    });
     console.log(allDogs);
     return allDogs;
   } catch (error) {

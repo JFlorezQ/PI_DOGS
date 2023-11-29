@@ -45,9 +45,7 @@ const getDogs = async (req, res) => {
     });
 
     // Mapear los dogs de la base de datos
-// ...
 
-// Mapear los dogs de la base de datos
 const dogsDB = dogsDatabase.map((dog) => ({
   id: dog.id,
   image: dog.reference_image_id || "https://img.freepik.com/vector-premium/ilustracion-perro-lindo-perro-kawaii-chibi-estilo-dibujo-vectorial-dibujos-animados-perro_622550-74.jpg",
@@ -60,7 +58,6 @@ const dogsDB = dogsDatabase.map((dog) => ({
   life_span: dog.life_span
 }));
 
-// ...
 
 
     // Combinar datos de la API y la base de datos

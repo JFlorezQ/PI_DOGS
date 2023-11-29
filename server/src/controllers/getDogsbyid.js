@@ -7,70 +7,68 @@
 const axios = require('axios');
 const { YOUR_API_KEY } = process.env;
 const URL = `https://api.thedogapi.com/v1/breeds`;
-const { Dog } = require('../db.js')
+const { Dog, Temperament, DogTemperament } = require('../db.js');
+
 
 const getDogById = async (req, res) => {
   try {
     const { id } = req.params;
-
     const uuidRegExp = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
 
     let dog;
 
-    //evalua si el id es un integro
-
     if (/^\d+$/.test(id)) {
-      // Si el ID es un número, busca La raza en la API
       const response = await axios.get(`${URL}/${id}?api_key=${YOUR_API_KEY}`);
 
       if (!response.data.name) {
         throw new Error(`Faltan datos de la raza con ID (api): ${id}`);
       }
-      // Si encuentra el id, la constante dog toma estos datos
+
       dog = {
         id: response.data.id,
         image: `https://cdn2.thedogapi.com/images/${response.data.reference_image_id}.jpg`,
         name: response.data.name,
-        // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
-        weightMetric: response.data.weight ? `${response.data.weight.metric} kg` : "Raza sin peso",
-        weightImperial: response.data.weight ? `${response.data.weight.imperial} lb` : "Raza sin peso",
-        temperament: response.data.temperament || "Raza sin temperamento",
-        heightMetric: response.data.height ? `${response.data.height.metric} cm` : "Raza sin altura",
-        heightImperial: response.data.height ? `${response.data.height.imperial} inch` : "Raza sin altur",
-        life_span: response.data.life_span
+        weightMetric: response.data.weight ? `${response.data.weight.metric} kg` : 'Raza sin peso',
+        weightImperial: response.data.weight ? `${response.data.weight.imperial} lb` : 'Raza sin peso',
+        temperament: response.data.temperament || 'Raza sin temperamento',
+        heightMetric: response.data.height ? `${response.data.height.metric} cm` : 'Raza sin altura',
+        heightImperial: response.data.height ? `${response.data.height.imperial} inch` : 'Raza sin altura',
+        life_span: response.data.life_span,
       };
     } else if (uuidRegExp.test(id)) {
-      // Si el ID es un UUID, busca el conductor en la base de datos
-      const dogFromDB = await Dog.findByPk(id);
-
-      //Si no lo encuentra en la base de datos tira el error
+      const dogFromDB = await Dog.findByPk(id, {
+        include: [
+          {
+            model: Temperament,
+            attributes: ['name'],
+            through: {
+              model: DogTemperament,
+              attributes: [],
+            },
+          },
+        ],
+      });
 
       if (!dogFromDB) {
         throw new Error(`Faltan datos de la raza con ID: ${id}`);
       }
 
-      //Si encuentra el id, dog toma estos datos
-
-
       dog = {
         id: dogFromDB.id,
-            image: dogFromDB.reference_image_id || "https://img.freepik.com/vector-premium/ilustracion-perro-lindo-perro-kawaii-chibi-estilo-dibujo-vectorial-dibujos-animados-perro_622550-74.jpg",
-            name: dogFromDB.name,
-            // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
-            weightMetric: `${dogFromDB.weightMetric} kg`|| "Raza sin peso",
-            weightImperial: `${dogFromDB.weightImperial}lb ` || "Raza sin peso",
-            temperament: dogFromDB.temperaments || "Raza sin temperamento",
-            heightMetric:  `${dogFromDB.heightMetric} cm` || "Raza sin altura",
-            heightImperial: `${dogFromDB.heightImperial} inch`|| "Raza sin altura",
-            life_span: dogFromDB.life_span
+        image: dogFromDB.reference_image_id || 'https://img.freepik.com/vector-premium/ilustracion-perro-lindo-perro-kawaii-chibi-estilo-dibujo-vectorial-dibujos-animados-perro_622550-74.jpg',
+        name: dogFromDB.name,
+        weightMetric: `${dogFromDB.weightMetric} kg` || 'Raza sin peso',
+        weightImperial: `${dogFromDB.weightImperial} lb` || 'Raza sin peso',
+        temperament: dogFromDB.Temperaments.map((temp) => temp.name).join(', ') || 'Raza sin temperamento',
+        heightMetric: `${dogFromDB.heightMetric} cm` || 'Raza sin altura',
+        heightImperial: `${dogFromDB.heightImperial} inch` || 'Raza sin altura',
+        life_span: dogFromDB.life_span,
       };
+    } else {
+      throw new Error(`${id} es un tipo de dato incorrecto`);
     }
 
-    else { throw new Error(`${id} es un tipo de dato incorrecto`) }
-    // de cualquier modo si no hay error retorna dog
-
     return res.status(200).json(dog);
-
   } catch (error) {
     if (error.response) {
       return res.status(500).send(error.response.data.error);
