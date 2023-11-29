@@ -21,7 +21,8 @@ const postDogs = async (dog) => {
     }
 
     // Crear el perro
-    const newDog = await Dog.create({
+   const newDog = await Dog.create(
+      {
       reference_image_id: dog.reference_image_id,
       name: dog.name,
       weightImperial: `${parseInt(dog.weightMetricMin * 2.205)} - ${parseInt(dog.weightMetricMax * 2.205)}`,

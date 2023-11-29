@@ -19,6 +19,7 @@ function Detail() {
       });
       return setDogsID({});
    }, [id]);
+   console.log(dogsID)
   return (
     <div className="detail-container">
       <>

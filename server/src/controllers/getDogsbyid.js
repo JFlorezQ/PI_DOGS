@@ -59,7 +59,7 @@ const getDogById = async (req, res) => {
             // Verificar que haya recibido el objeto de peso para ir hasta el sistema metrico
             weightMetric: `${dogFromDB.weightMetric} kg`|| "Raza sin peso",
             weightImperial: `${dogFromDB.weightImperial}lb ` || "Raza sin peso",
-            temperament: dogFromDB.temperament || "Raza sin temperamento",
+            temperament: dogFromDB.temperaments || "Raza sin temperamento",
             heightMetric:  `${dogFromDB.heightMetric} cm` || "Raza sin altura",
             heightImperial: `${dogFromDB.heightImperial} inch`|| "Raza sin altura",
             life_span: dogFromDB.life_span

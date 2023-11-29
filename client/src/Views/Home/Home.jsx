@@ -28,6 +28,7 @@ function Home() {
     }
   }
 
+
   return (
     <div className="homecontainer">
 
@@ -51,6 +52,7 @@ function Home() {
       </div>
 
         <Cards allDogs={currentDogs} />
+
 
 
 

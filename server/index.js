@@ -8,6 +8,6 @@ const {conn} = require("./src/db")
 const PORT = 1030
 
 server.listen( PORT, ()=>{
-  conn.sync({force: true})
+  conn.sync({force: false})
   console.log(`Listening on port ${PORT}`)
 })

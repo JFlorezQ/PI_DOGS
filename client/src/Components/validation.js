@@ -30,9 +30,7 @@ const validation = (input) => {
     errors.life_span = "Por favor ingrese un tiempo de vida";
   }
 
-  if (!input.temperament || input.temperament.length === 0) {
-    errors.temperament = "Por favor seleccione al menos un temperamento";
-  }
+
 
   // Verificar que la reference_image_id sea un enlace válido
   if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(input.reference_image_id)) {
